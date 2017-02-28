@@ -7,7 +7,7 @@
 # Can not use anyone else's code
 
 import sys
-from Flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
@@ -76,11 +76,12 @@ def convert_to_binary(multiple):
 @app.route('/converted', methods=['GET', 'POST'])
 def converted():
     global binary_number
-    return render_template('converted.html', binary_number)
+    return render_template('converted.html', binary_number=binary_number)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     global n
+    global binary_number
 
     if request.method == 'POST':
         n = int(request.form['number'].strip())
